@@ -1,0 +1,846 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <meta charset="utf-8" />
+        <title>ICARDS Flash Cards</title>
+        <meta name="description" content="St John NZ ICARDS Flash Cards" />
+        <meta name="keywords" content="St John, icards, flash cards, drugs, indications, action, contraindications, cautions, dose, route, gtn, methoxy, adrenaline, aspirin, ondansetron, glucagon, paracetamol, salbutamol"/>
+        <meta name="author" content="Jarrod Oberto" />
+
+        <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <link rel="stylesheet" href="css/normalize.css" />
+        <link rel="stylesheet" href="css/skeleton.css" />
+
+        <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <link rel="icon" type="image/png" href="images/favicon.png" />
+
+        <style>
+            @font-face {
+                font-family: "Raleway";
+                src:
+                    url("fonts/Raleway/Raleway-VariableFont_wght.ttf")
+                        format("truetype"),
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            hr {
+                margin-top: 2rem;
+/*                border-top: 1px solid #eef1f3;*/
+                border-style: dashed;
+            }
+
+            h1 .sub {
+                font-size: 2rem;
+                vertical-align: middle;
+            }
+
+            h4 {
+                text-decoration: underline;
+            }
+
+            h6 {
+                font-weight: bold;
+                text-decoration: underline;
+                margin: 0;
+                padding: 0;
+            }
+
+            textarea {
+                height: 200px;
+            }
+
+            .retest-cards {
+                cursor: pointer;
+            }
+
+
+            /* collapsible area */
+            .collapsible {
+                  background-color: #f1f1f1;
+                  color: #444;
+                  cursor: pointer;
+                  padding: 10px;
+                  border: none;
+                  text-align: left;
+                  outline: none;
+                  font-size: 18px;
+                  width: 100%;
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  margin-bottom: 0;
+                }
+
+                .collapsible .options-text {
+                    flex-grow: 1;
+                    text-align: right;
+                }
+
+                .active, .collapsible:hover {
+                  background-color: #ddd;
+                }
+
+                .content {
+                  padding: 0 10px;
+                  display: none;
+                  overflow: hidden;
+                  background-color: #f9f9f9;
+                }
+
+                .icon {
+                  margin-left: 10px;
+                }
+                /* End collapsible area */
+
+
+                /* Adding icons to buttons */
+                ion-icon {
+                  pointer-events: none;
+                }
+
+                .button ion-icon {
+                    font-size: 20px;
+                    vertical-align: middle;
+                    padding-bottom: 3px;
+                }
+
+                .button.short {
+                    padding: 0 15px !important; /* Use this if you're using only an icon in a button*/
+                }
+                /* End adding icons to buttons */
+
+                /* Checkboxes */
+                #checkbox-container-icards, #checkbox-container-drugs {
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    gap: 10px;
+                    padding: 15px;
+                }
+
+                #checkbox-container-icards input,
+                #checkbox-container-drugs input {
+                    margin-bottom: 0.6rem;
+                }
+
+                .item {
+                    display: flex;
+                    align-items: center;
+                }
+                .item label {
+                    margin-left: 5px;
+                    /* margin-bottom: 1.5rem; */
+                    font-weight: normal;
+                }
+
+                ul {
+                  list-style-position: outside;
+                }
+
+                .li-header {
+                    text-decoration: underline;
+                    font-weight: bold;
+                    margin: 5px 0 20px 0;
+                    display: inline-block;
+                }
+
+                /* End Checkboxes */
+
+                /* Tooltip */
+                .tooltip {
+                  position: relative;
+                  display: inline-block;
+                }
+
+                .tooltip .tooltiptext {
+                  visibility: hidden;
+                  width: 120px;
+                  background-color: black;
+                  color: #fff;
+                  text-align: center;
+                  padding: 0px;
+                  margin: 0px;
+                  border-radius: 5px;
+
+                  /* Position the tooltip */
+                  position: absolute;
+                  z-index: 1;
+                  top: 125%; /* Adjust as needed */
+                  left: 50%;
+                    transform: translateX(-50%);
+                  opacity: 0;
+                  transition: opacity 0.3s;
+                  transition-delay: 1.5s; /* 3-second delay */
+                }
+
+                .tooltip:hover .tooltiptext {
+                  visibility: visible;
+                  opacity: 1;
+                }
+
+                /* End Tooltips */
+
+        </style>
+
+        <script
+            type="module"
+            src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+        ></script>
+        <script
+            nomodule
+            src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+        ></script>
+    </head>
+    <body>
+        <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <div class="container">
+            <div class="row" style="margin-top: 20px">
+                <div class="column">
+                    <h1 class="u-pull-left">ICARDS <span class="sub">St John NZ - ICARDS Flash Cards</span></h1>
+                </div>
+            </div>
+
+            <button class="collapsible">
+                <div class="options-text" style="font-size: 10px">Options</div>
+                <!-- &nbsp; -->
+                <ion-icon name="chevron-down-outline" aria-hidden="true" class="icon"></ion-icon>
+            </button>
+            <div class="content">
+                <div style="margin-top:20px"><input type="checkbox" id="selectAll" data-name="icards" onclick="toggleAllCheckboxes(this, '.item-icards input')"> <h6 style="display: inline-block">ICARDS</h6> </div>
+                <div id="checkbox-container-icards"></div>
+                <div><input type="checkbox" id="selectAll" data-name="drugs" onclick="toggleAllCheckboxes(this, '.item-drugs input')"> <h6 style="display: inline-block">Drugs</h6> </div>
+                <div id="checkbox-container-drugs"></div>
+                <div><span class="u-pull-right" style="color: #ccc">v1.1</span></div>
+            </div>
+
+            <div class="row" style="margin-top: 20px">
+                <div class="one-half column">
+                    <div><strong>Drug:</strong> <span id="drug"></span></div>
+                    <div><strong>ICARD:</strong> <span id="icard"></span></div>
+                </div>
+                <div class="one-half column">
+
+                    <a class="button u-pull-right"
+                        id="next-question-btn"
+                        onclick="getNextQuestion()">Next question</a>
+
+                    <label class="retest-cards u-pull-right" style="clear:both">
+                        <input type="checkbox" id="retestCheckbox">
+                        <span class="label-body tooltipx">Retest cards (<span id="retest-card-count"></span>)
+                            <!-- <span class="tooltiptext">Only use marked cards</span> -->
+                        </span>
+                    </label>
+
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="row" style="margin-top: 30px">
+                <div class="one-half column">
+                    <textarea
+                        class="u-full-width"
+                        placeholder="Your answer"
+                        id="your-answer-tarea"
+                    ></textarea>
+
+                    <div class="u-pull-right">
+
+                        <a class="button button-primary "
+                            id="show-answer-btn"
+                            onclick="toggleAnswer()"
+                            >Show answer</a>
+                        </div>
+                </div>
+                <div class="one-half column">
+                    <div id="answer-container" style="display: none">
+                        <div id="answer"></div>
+
+                    <a class="button short u-pull-right tooltip"
+                        id="add-to-retest-btn"
+                        aria-hidden="true"
+                        title=""
+                        onclick="addToRetest()"><ion-icon name="add-circle-outline" id="add-to-retest-icon"></ion-icon>
+                        <span class="tooltiptext">Retest later</span>
+                    </a>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" id="show-icards-container" style="margin-top: 20px; display:none;">
+                <div class="column" >
+                    <div><h4 id="show-icards-drug-name"></h4></div>
+                    <div id="show-icards-details"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <!-- Main script that imports helper.js -->
+        <script src="./data/drugs.js"></script>
+        <script src="./data/icards.js"></script>
+        <script src="./js/utils.js"></script>
+        <script src="./js/local-storage.js"></script>
+
+        <script>
+            // window.addEventListener("DOMContentLoaded", function () {
+
+            var _storeObj = LocalStorage;
+
+            let drugs = Utils.sortByName(drugData.getAllDrugs());
+            let icards = icardData.getAllIcards();
+console.log('%c> icards:', "color:pink",  icards);
+            var _currentSelection = {
+                drug: {},
+                icard: {},
+            }
+
+            reset();
+
+            drawCheckboxes(
+                icards,
+                document.getElementById("checkbox-container-icards"),
+                "icards",
+            );
+            drawCheckboxes(
+                drugs,
+                document.getElementById("checkbox-container-drugs"),
+                "drugs",
+            );
+            CheckOffSelectedItems(icards, "icards");
+            CheckOffSelectedItems(drugs, "drugs");
+
+
+            getNextQuestion();
+
+
+
+            function getNextQuestion()
+            {
+                const checkbox = document.querySelector('#retestCheckbox');
+
+                // If "to learn" checkbox is selected
+                if (checkbox.checked) {
+                    console.log('%c> getToLearnQuestion()', "color:#f1107a");
+                    var dataset = getToLearnQuestion();
+                } else {
+                    console.log('%c> getRandomQuestion()', "color:#f1107a");
+                    var dataset = getRandomQuestion();
+                }
+
+                if (typeof dataset === "undefined") {
+                    console.log('%c> ** No drugs/icards **', "color:skyblue");
+                    return;
+                }
+
+                let randomDrugObj = dataset.drug;
+                let randomIcardObj = dataset.icard;
+
+                _currentSelection.drug = randomDrugObj;
+                _currentSelection.icard = randomIcardObj;
+
+                populateQuestion(randomDrugObj, randomIcardObj);
+            }
+
+            function showSelectedQuestion()
+            {
+                let retestItemObj = getRetestItem();
+
+                populateQuestion(retestItemObj.drug, retestItemObj.icard);
+            }
+
+
+            function populateQuestion(drugObj, icardObj)
+            {
+
+                // Reset the elements
+                reset();
+
+                console.log('%c> randomDrugObj:', 'color:orange',  drugObj);
+                console.log('%c> randomIcard:', 'color:orange',  icardObj);
+
+
+                // Update the HTML with selected drug + icard
+                document.getElementById("drug").innerHTML = '<a id="showDrugIcard" href="#" >' + drugObj.name + '</a>';
+
+                // Add an event listener to the dynamically created link - this will show the whole icard for the drug
+                document.getElementById("showDrugIcard").addEventListener("click", function(event) {
+                    event.preventDefault();
+
+                    // Show the row
+                    let containerElement = document.getElementById("show-icards-container");
+                    if (containerElement.style.display === "none") {
+
+                        handleShowDrugIcardClick(drugObj, icards)
+                        containerElement.style.display = "block";
+
+                    } else {
+                        containerElement.style.display = "none";
+                    }
+
+                });
+
+
+                document.getElementById("icard").innerHTML = icardObj.name;
+
+                // Get the answer from the obj
+                const answerArr = drugObj[icardObj.id];
+
+                // Format the answer
+                formattedAnswer = formatAnswer(answerArr);
+
+                // Update the HTML with answer
+                document.getElementById("answer").innerHTML = formattedAnswer;
+
+            }
+
+            function getRandomQuestion()
+            {
+
+                // Get pool of user selected icard items
+                var icardsUserSelected = getUserSelectedItems(icards);
+
+                // Get pool of user selected drugs items -> JI: this could also be getUserToLearnItems
+                var drugsUserSelected = getUserSelectedItems(drugs);
+
+
+                // Validate at lease 1 ICARD has been selected
+                if (icardsUserSelected.length == 0) {
+                    console.log("No ICARDS selected");
+                    return;
+                }
+
+                // Validate at lease 1 drug has been selected
+                if (drugsUserSelected.length == 0) {
+                    console.log("No drugs selected");
+                    return;
+                }
+
+                // Get a random drug from our object
+                const randomDrugObj =
+                    drugsUserSelected[
+                        Math.floor(Math.random() * drugsUserSelected.length)
+                    ];
+
+                // Get a random icard property
+                const randomIcardObj =
+                    icardsUserSelected[
+                        Math.floor(Math.random() * icardsUserSelected.length)
+                    ];
+
+                return {
+                    'drug': randomDrugObj,
+                    'icard': randomIcardObj
+                }
+            }
+
+            function getToLearnQuestion()
+            {
+                // const toLearnObjs = JSON.parse(localStorage.getItem("tolearn")) || [];
+                const toLearnObjs = _storeObj.decode(_storeObj.load('tolearn')) || [];
+
+                // Validate at lease 1 ICARD has been selected
+                if (toLearnObjs.length == 0) {
+                    console.log("No cards to learn");
+                    return;
+                }
+
+
+    // if (toLearnObjs.length == 0) {
+    // 	return {
+    // 		'drug': '',
+    // 		'icard': ''
+    // 	};
+    // }
+                console.log('%c> toLearnObjs:', 'color:orange',  toLearnObjs);
+                /*
+                // Example object
+                let toTestObj = {
+                    drug: {
+                        "name": "Salbutamol",
+                        "id": "salbutamol",
+                        "dd": [
+                            "1-2 hours"
+                        ],
+                    },
+                    icard: {id: 'dd', name: 'Duration'}
+                };
+                */
+
+                // Get from local storage -> return array of objects [{},{},{}] (each object will look like `toTestObj`)
+                // toLearnObjs = [{},{},{}];
+                //
+
+                // Get a random "to learn" object
+                const toTestObj =
+                    toLearnObjs[
+                        Math.floor(Math.random() * toLearnObjs.length)
+                    ];
+
+console.log('%c> toTestObj:', 'color:orange',  toTestObj);
+
+
+                const randomDrugObj = toTestObj.drug;
+
+                const randomIcardObj = toTestObj.icard;
+
+                return {
+                    'drug': randomDrugObj,
+                    'icard': randomIcardObj
+                }
+            }
+
+            function reset()
+            {
+
+                // Reset the answer box (hide it)
+                let element = document.getElementById("answer-container");
+                element.style.display = "none";
+
+                // Reset the "Show Answer button"
+                let answerButton = document.getElementById("show-answer-btn");
+                answerButton.innerText = "Show answer";
+
+                // Reset the answer text area (clear it)
+                document.getElementById("your-answer-tarea").value = "";
+
+
+                // Hide the row that shows the whole icard
+                let containerElement = document.getElementById("show-icards-container");
+                containerElement.style.display = "none";
+
+                /* =============================================================================
+                 * Rest the "Retest cards" stuff
+                 * ===========================================================================*/
+
+                updateRetestCards();
+
+
+            }
+
+            function updateRetestCards()
+            {
+                // Get the button and the icon
+                const button = document.getElementById('add-to-retest-btn');
+                const icon = document.getElementById('add-to-retest-icon');
+
+                let toLearnCount = _storeObj.getDrugCount('tolearn');
+
+
+                // Update the inner text with the new count
+                const retestCardCountElement = document.getElementById('retest-card-count');
+                retestCardCountElement.textContent = toLearnCount;
+
+
+                if (toLearnCount > 0) {
+                    // Show this
+                    document.querySelector('.retest-cards').style.display = '';
+                } else {
+                    // Hide this
+                    document.querySelector('.retest-cards').style.display = 'none';
+
+                    // Uncheck
+                    // document.getElementById("retestCheckbox").checked = false;
+                    document.querySelector('#retestCheckbox').checked = false;
+                }
+                // ~~~ ++ ~~~ END
+
+                let item = _storeObj.getDrugById('tolearn', _currentSelection.drug.id, _currentSelection.icard.id);
+
+
+                // Set button icon
+                if (typeof item === "undefined") {
+                    icon.setAttribute('name', 'add-circle-outline');
+                } else {
+                    icon.setAttribute('name', 'remove-circle-outline');
+                }
+
+
+
+            }
+
+            function drawCheckboxes(items, checkboxContainer, classname)
+            {
+                items.forEach((item) => {
+                    let div = document.createElement("div");
+                    div.classList.add("item");
+                    div.classList.add("item-" + classname);
+
+                    let checkbox = document.createElement("input");
+                    checkbox.type = "checkbox";
+                    checkbox.id = item.id;
+                    checkbox.checked = true;
+                    checkbox.addEventListener("change", saveSelectedItems);
+                    checkbox.setAttribute("data-name", classname);
+
+                    let label = document.createElement("label");
+                    label.htmlFor = item.id;
+                    label.textContent = item.name;
+
+                    div.appendChild(checkbox);
+                    div.appendChild(label);
+                    checkboxContainer.appendChild(div);
+                });
+            }
+
+            function formatAnswer(answerArr)
+            {
+                let html = "";
+
+                html += "<ul>";
+                for (i = 0, len = answerArr.length; i < len; i++) {
+                    var answer = answerArr[i];
+
+                    if (answer.indexOf("no-bullet") >= 0) {
+                        html += answer;
+                    } else {
+                        html += "<li>" + answer + "</li>";
+                    }
+                }
+                html += "</ul>";
+
+                return html;
+            }
+
+            function showAnswer() {
+                let element = document.getElementById("answer-container");
+                element.style.display = "block";
+            }
+
+            function toggleAnswer() {
+                let element = document.getElementById("answer-container");
+                let button = document.getElementById("show-answer-btn");
+
+                if (
+                    element.style.display === "none" ||
+                    element.style.display === ""
+                ) {
+                    element.style.display = "block";
+                    button.innerText = "Hide answer"; // Change button text
+                } else {
+                    element.style.display = "none";
+                    button.innerText = "Show answer"; // Reset button text
+                }
+            }
+
+            function getUserSelectedItems(items) {
+                const selectedItems = [];
+                items.forEach((item) => {
+                    let checkbox = document.getElementById(item.id);
+
+                    if (checkbox.checked) {
+                        // selectedItems.push({
+                        //     id: item.id,
+                        //     name: item.name,
+                        // });
+                        selectedItems.push(item);
+                    }
+                });
+
+                return selectedItems;
+            }
+
+            function saveSelectedItems() {
+                let name = this.getAttribute("data-name");
+
+                _saveSelectedItems(name)
+            }
+
+            // Save selected items to local storage
+            function _saveSelectedItems(name) {
+
+                const selectedItems = [];
+
+                if (name == "icards") {
+                    icards.forEach((item) => {
+                        let checkbox = document.getElementById(item.id);
+                        if (checkbox.checked) {
+                            selectedItems.push({
+                                id: item.id,
+                                name: item.name,
+                            });
+                        }
+                    });
+                } else if (name == "drugs") {
+                    drugs.forEach((item) => {
+                        let checkbox = document.getElementById(item.id);
+                        if (checkbox.checked) {
+                            selectedItems.push({
+                                id: item.id,
+                                name: item.name,
+                            });
+                        }
+                    });
+                }
+
+                localStorage.setItem(name, JSON.stringify(selectedItems));
+            }
+
+            // Load selected items from local storage
+            function CheckOffSelectedItems(items, name) {
+                const savedItems = JSON.parse(localStorage.getItem(name)) || [];
+
+                if (savedItems == "") {
+                    return;
+                }
+
+                // Clear previous selections
+                items.forEach((item) => {
+                    let checkbox = document.getElementById(item.id);
+                    checkbox.checked = false; // Uncheck all checkboxes
+                });
+                // Repopulate checkboxes based on saved items
+                savedItems.forEach((savedItem) => {
+                    let checkbox = document.getElementById(savedItem.id);
+                    if (checkbox) {
+                        checkbox.checked = true; // Check the saved checkboxes
+                    }
+                });
+                // alert("Checkboxes loaded from local storage.");
+            }
+
+            function addToRetest()
+            {
+                console.log('%c> _currentSelection:', "color:orange",  _currentSelection);
+
+                // Get the button and the icon
+                const button = document.getElementById('add-to-retest-btn');
+                const icon = document.getElementById('add-to-retest-icon');
+
+                // See if this is already in our "toLearn" list.
+                let item = _storeObj.getDrugById('tolearn', _currentSelection.drug.id, _currentSelection.icard.id);
+
+
+                /**
+                 * If an item is returned, then it already exists. If it's undefined,
+                 * then it doesn't so we can add it.
+                 */
+                if (typeof item === "undefined") {
+
+                    console.log('%c> >>> Add to Retest List', "color:#f1107a");
+
+                    // Do this first to feel more responsive
+                    // icon.setAttribute('name', 'remove-circle-outline');
+
+                    // Add
+                    _storeObj.addItem('tolearn', _currentSelection);
+
+                } else {
+
+                    console.log('%c> >>> Remove from Retest List', "color:#f1107a");
+
+                    // Do this first to feel more responsive
+                    // icon.setAttribute('name', 'add-circle-outline');
+
+                    // remove
+                    _storeObj.deleteDrugById('tolearn', _currentSelection.drug.id, _currentSelection.icard.id);
+                }
+
+                updateRetestCards();
+
+            }
+
+            document.addEventListener("DOMContentLoaded", function () {
+                var collapsible = document.querySelector(".collapsible");
+                var content = document.querySelector(".content");
+                var icon = document.querySelector("ion-icon");
+
+                collapsible.addEventListener("click", function () {
+                    this.classList.toggle("active");
+
+                    // Toggle content visibility
+                    if (content.style.display === "block") {
+                        content.style.display = "none";
+                        icon.setAttribute("name", "chevron-down-outline");
+                    } else {
+                        content.style.display = "block";
+                        icon.setAttribute("name", "chevron-up-outline");
+                    }
+                });
+            });
+
+        // Toggle all checkboxes based on the "Select All" checkbox state
+        function toggleAllCheckboxes(selectAllCheckbox, ele) {
+            console.log('%c> aaaa)', "color:#f1107a");
+            // const checkboxes = document.querySelectorAll('.item-icards input');
+            const checkboxes = document.querySelectorAll(ele);
+
+
+            checkboxes.forEach(checkbox => {
+                console.log('%c> ^', "color:#f1107a");
+                checkbox.checked = selectAllCheckbox.checked;
+
+                // checkbox.click();
+            });
+
+            let name = selectAllCheckbox.getAttribute("data-name");
+            _saveSelectedItems(name);
+
+        }
+
+
+/*
+                const answerArr = drugObj[icardObj.id];
+
+                // Format the answer
+                formattedAnswer = formatAnswer(answerArr);
+*/
+
+
+
+        function handleShowDrugIcardClick(drugObj, icardsObj)
+        {
+            console.log('%c> drugObj_:', "color:orange",  drugObj);
+            console.log('%c> icardsObj_:', "color:orange",  icardsObj);
+
+
+            // Add the header
+            let headerElement = document.getElementById("show-icards-drug-name");
+            headerElement.innerHTML = drugObj.name;
+
+
+            var icardsDetails = ''
+            icardsObj.forEach((item) => {
+
+                console.log('%c> item:', "color:orange",  item);
+
+                icardsDetails += '<span><strong>' + item.name + '</strong></span>';
+
+
+                const answerArr = drugObj[item.id];
+                console.log('%c> answerArr:', "color:orange",  answerArr);
+                icardsDetails += formatAnswer(answerArr);
+
+            });
+
+
+
+            // Add the icards contents
+            let detailsElement = document.getElementById("show-icards-details");
+            detailsElement.innerHTML = icardsDetails;
+
+            // // Show the row
+            // let containerElement = document.getElementById("show-icards-container");
+            // containerElement.style.display = "block";
+
+
+
+        }
+
+
+
+            // });
+        </script>
+    </body>
+</html>
