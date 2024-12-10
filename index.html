@@ -62,6 +62,10 @@
                 cursor: pointer;
             }
 
+            #show-icards-details li {
+                margin-bottom: 0px;
+            }
+
 
             /* collapsible area */
             .collapsible {
@@ -188,9 +192,55 @@
 
                 /* End Tooltips */
 
-                #show-icards-details li {
-                    margin-bottom: 0px;
-                }
+
+                /* Additional button styles */
+
+                .button.button-secondary,
+                button.button-secondary,
+                input[type="submit"].button-secondary,
+                input[type="reset"].button-secondary,
+                input[type="button"].button-secondary {
+                  color: #FFF;
+                  background-color: #1abc9c;
+                  border-color: #16a085; }
+                .button.button-secondary:hover,
+                button.button-secondary:hover,
+                input[type="submit"].button-secondary:hover,
+                input[type="reset"].button-secondary:hover,
+                input[type="button"].button-secondary:hover,
+                .button.button-secondary:focus,
+                button.button-secondary:focus,
+                input[type="submit"].button-secondary:focus,
+                input[type="reset"].button-secondary:focus,
+                input[type="button"].button-secondary:focus {
+                  color: #FFF;
+                  background-color: #16a085;
+                  border-color: #117864; }
+
+                .button.button-tirtiary,
+                button.button-tirtiary,
+                input[type="submit"].button-tirtiary,
+                input[type="reset"].button-tirtiary,
+                input[type="button"].button-tirtiary {
+                  color: #FFF;
+                  background-color: #3498db;
+                  border-color: #2980b9; }
+                .button.button-tirtiary:hover,
+                button.button-tirtiary:hover,
+                input[type="submit"].button-tirtiary:hover,
+                input[type="reset"].button-tirtiary:hover,
+                input[type="button"].button-tirtiary:hover,
+                .button.button-tirtiary:focus,
+                button.button-tirtiary:focus,
+                input[type="submit"].button-tirtiary:focus,
+                input[type="reset"].button-tirtiary:focus,
+                input[type="button"].button-tirtiary:focus {
+                  color: #FFF;
+                  background-color: #2980b9;
+                  border-color: #1f618d; }
+
+
+                /* End Additional button styles */
 
         </style>
 
@@ -233,7 +283,7 @@
                 </div>
                 <div class="one-half column">
 
-                    <a class="button u-pull-right"
+                    <a class="button button-secondary u-pull-right"
                         id="next-question-btn"
                         onclick="getNextQuestion()">Next question</a>
 
@@ -259,7 +309,7 @@
 
                     <div class="u-pull-right">
 
-                        <a class="button button-primary "
+                        <a class="button button-tirtiary"
                             id="show-answer-btn"
                             onclick="toggleAnswer()"
                             >Show answer</a>
