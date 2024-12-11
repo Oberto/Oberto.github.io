@@ -53,7 +53,7 @@
                 font-size: 16px;
                 font-weight: bold;
                 text-decoration: underline;
-                margin: 0;
+                margin: 0 0 10px 0;
                 padding: 0;
             }
 
@@ -114,6 +114,12 @@
             <div class="row" style="margin-top: 20px">
                 <div class="column">
                     <h1 class="u-pull-left">ICARDS <span class="sub">St John NZ - ICARDS Flash Cards</span></h1>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 0px">
+                <div class="column">
+                    <span style="font-size: 14px;">This page lists all data used by this service.</span>
                 </div>
             </div>
 
@@ -207,7 +213,7 @@
                 // Loop through each drug
                 drugsObj.forEach((drugObj) => {
 
-                    output += '<h4>' + drugObj.name + '</h4>';
+                    output += '<h4>~ ' + drugObj.name + ' ~</h4>';
 
 
                     // loop through each icard
