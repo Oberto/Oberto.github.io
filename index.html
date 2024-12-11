@@ -69,175 +69,175 @@
 
             /* collapsible area */
             .collapsible {
-                  background-color: #f1f1f1;
-                  color: #444;
-                  cursor: pointer;
-                  padding: 10px;
-                  border: none;
-                  text-align: left;
-                  outline: none;
-                  font-size: 18px;
-                  width: 100%;
-                  display: flex;
-                  justify-content: space-between;
-                  align-items: center;
-                  margin-bottom: 0;
-                }
+                background-color: #f1f1f1;
+                color: #444;
+                cursor: pointer;
+                padding: 10px;
+                border: none;
+                text-align: left;
+                outline: none;
+                font-size: 18px;
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 0;
+            }
 
-                .collapsible .options-text {
-                    flex-grow: 1;
-                    text-align: right;
-                }
+            .collapsible .options-text {
+                flex-grow: 1;
+                text-align: right;
+            }
 
-                .active, .collapsible:hover {
-                  background-color: #ddd;
-                }
+            .active, .collapsible:hover {
+                background-color: #ddd;
+            }
 
-                .content {
-                  padding: 0 10px;
-                  display: none;
-                  overflow: hidden;
-                  background-color: #f9f9f9;
-                }
+            .content {
+                padding: 0 10px;
+                display: none;
+                overflow: hidden;
+                background-color: #f9f9f9;
+            }
 
-                .icon {
-                  margin-left: 10px;
-                }
-                /* End collapsible area */
-
-
-                /* Adding icons to buttons */
-                ion-icon {
-                  pointer-events: none;
-                }
-
-                .button ion-icon {
-                    font-size: 20px;
-                    vertical-align: middle;
-                    padding-bottom: 3px;
-                }
-
-                .button.short {
-                    padding: 0 15px !important; /* Use this if you're using only an icon in a button*/
-                }
-                /* End adding icons to buttons */
-
-                /* Checkboxes */
-                #checkbox-container-icards, #checkbox-container-drugs {
-                    display: grid;
-                    grid-template-columns: repeat(3, 1fr);
-                    gap: 10px;
-                    padding: 15px;
-                }
-
-                #checkbox-container-icards input,
-                #checkbox-container-drugs input {
-                    margin-bottom: 0.6rem;
-                }
-
-                .item {
-                    display: flex;
-                    align-items: center;
-                }
-                .item label {
-                    margin-left: 5px;
-                    /* margin-bottom: 1.5rem; */
-                    font-weight: normal;
-                }
-
-                ul {
-                  list-style-position: outside;
-                }
-
-                .li-header {
-                    text-decoration: underline;
-                    font-weight: bold;
-                    margin: 5px 0 20px 0;
-                    display: inline-block;
-                }
-
-                /* End Checkboxes */
-
-                /* Tooltip */
-                .tooltip {
-                  position: relative;
-                  display: inline-block;
-                }
-
-                .tooltip .tooltiptext {
-                  visibility: hidden;
-                  width: 120px;
-                  background-color: black;
-                  color: #fff;
-                  text-align: center;
-                  padding: 0px;
-                  margin: 0px;
-                  border-radius: 5px;
-
-                  /* Position the tooltip */
-                  position: absolute;
-                  z-index: 1;
-                  top: 125%; /* Adjust as needed */
-                  left: 50%;
-                    transform: translateX(-50%);
-                  opacity: 0;
-                  transition: opacity 0.3s;
-                  transition-delay: 1.5s; /* 3-second delay */
-                }
-
-                .tooltip:hover .tooltiptext {
-                  visibility: visible;
-                  opacity: 1;
-                }
-
-                /* End Tooltips */
+            .icon {
+                margin-left: 10px;
+            }
+            /* End collapsible area */
 
 
-                /* Additional button styles */
+            /* Adding icons to buttons */
+            ion-icon {
+                pointer-events: none;
+            }
 
-                .button.button-secondary,
-                button.button-secondary,
-                input[type="submit"].button-secondary,
-                input[type="reset"].button-secondary,
-                input[type="button"].button-secondary {
-                  color: #FFF;
-                  background-color: #1abc9c;
-                  border-color: #16a085; }
-                .button.button-secondary:hover,
-                button.button-secondary:hover,
-                input[type="submit"].button-secondary:hover,
-                input[type="reset"].button-secondary:hover,
-                input[type="button"].button-secondary:hover,
-                .button.button-secondary:focus,
-                button.button-secondary:focus,
-                input[type="submit"].button-secondary:focus,
-                input[type="reset"].button-secondary:focus,
-                input[type="button"].button-secondary:focus {
-                  color: #FFF;
-                  background-color: #16a085;
-                  border-color: #117864; }
+            .button ion-icon {
+                font-size: 20px;
+                vertical-align: middle;
+                padding-bottom: 3px;
+            }
 
-                .button.button-tirtiary,
-                button.button-tirtiary,
-                input[type="submit"].button-tirtiary,
-                input[type="reset"].button-tirtiary,
-                input[type="button"].button-tirtiary {
-                  color: #FFF;
-                  background-color: #3498db;
-                  border-color: #2980b9; }
-                .button.button-tirtiary:hover,
-                button.button-tirtiary:hover,
-                input[type="submit"].button-tirtiary:hover,
-                input[type="reset"].button-tirtiary:hover,
-                input[type="button"].button-tirtiary:hover,
-                .button.button-tirtiary:focus,
-                button.button-tirtiary:focus,
-                input[type="submit"].button-tirtiary:focus,
-                input[type="reset"].button-tirtiary:focus,
-                input[type="button"].button-tirtiary:focus {
-                  color: #FFF;
-                  background-color: #2980b9;
-                  border-color: #1f618d; }
+            .button.short {
+                padding: 0 15px !important; /* Use this if you're using only an icon in a button*/
+            }
+            /* End adding icons to buttons */
+
+            /* Checkboxes */
+            #checkbox-container-icards, #checkbox-container-drugs {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+                padding: 15px;
+            }
+
+            #checkbox-container-icards input,
+            #checkbox-container-drugs input {
+                margin-bottom: 0.6rem;
+            }
+
+            .item {
+                display: flex;
+                align-items: center;
+            }
+            .item label {
+                margin-left: 5px;
+                /* margin-bottom: 1.5rem; */
+                font-weight: normal;
+            }
+
+            ul {
+                list-style-position: outside;
+            }
+
+            .li-header {
+                /* text-decoration: underline; */
+                font-weight: bold;
+                margin: 10px 0 15px 0;
+                display: inline-block;
+            }
+
+            /* End Checkboxes */
+
+            /* Tooltip */
+            .tooltip {
+                position: relative;
+                display: inline-block;
+            }
+
+            .tooltip .tooltiptext {
+                visibility: hidden;
+                width: 120px;
+                background-color: black;
+                color: #fff;
+                text-align: center;
+                padding: 0px;
+                margin: 0px;
+                border-radius: 5px;
+
+                /* Position the tooltip */
+                position: absolute;
+                z-index: 1;
+                top: 125%; /* Adjust as needed */
+                left: 50%;
+                transform: translateX(-50%);
+                opacity: 0;
+                transition: opacity 0.3s;
+                transition-delay: 1.5s; /* 3-second delay */
+            }
+
+            .tooltip:hover .tooltiptext {
+                visibility: visible;
+                opacity: 1;
+            }
+
+            /* End Tooltips */
+
+
+            /* Additional button styles */
+
+            .button.button-secondary,
+            button.button-secondary,
+            input[type="submit"].button-secondary,
+            input[type="reset"].button-secondary,
+            input[type="button"].button-secondary {
+                color: #FFF;
+                background-color: #1abc9c;
+                border-color: #16a085; }
+            .button.button-secondary:hover,
+            button.button-secondary:hover,
+            input[type="submit"].button-secondary:hover,
+            input[type="reset"].button-secondary:hover,
+            input[type="button"].button-secondary:hover,
+            .button.button-secondary:focus,
+            button.button-secondary:focus,
+            input[type="submit"].button-secondary:focus,
+            input[type="reset"].button-secondary:focus,
+            input[type="button"].button-secondary:focus {
+                color: #FFF;
+                background-color: #16a085;
+                border-color: #117864; }
+
+            .button.button-tirtiary,
+            button.button-tirtiary,
+            input[type="submit"].button-tirtiary,
+            input[type="reset"].button-tirtiary,
+            input[type="button"].button-tirtiary {
+                color: #FFF;
+                background-color: #3498db;
+                border-color: #2980b9; }
+            .button.button-tirtiary:hover,
+            button.button-tirtiary:hover,
+            input[type="submit"].button-tirtiary:hover,
+            input[type="reset"].button-tirtiary:hover,
+            input[type="button"].button-tirtiary:hover,
+            .button.button-tirtiary:focus,
+            button.button-tirtiary:focus,
+            input[type="submit"].button-tirtiary:focus,
+            input[type="reset"].button-tirtiary:focus,
+            input[type="button"].button-tirtiary:focus {
+                color: #FFF;
+                background-color: #2980b9;
+                border-color: #1f618d; }
 
 
                 /* End Additional button styles */
@@ -343,7 +343,8 @@
             <div class="row" id="footer" style="margin-top: 20px; color: #ccc; font-size: 12px;">
                 <div class="column" >
                     <span>Contact: <a href="mailto:jarrod.oberto@stjohn.org.nz">Jarrod Oberto</a></span> <br />
-                    <span>Last updated: Dec 2024</span>
+                    <span>Last updated: Dec 2024</span><br />
+                    <span><a href="listdata.html" target="_blank">View all data</a></span><br />
 
                 </div>
             </div>
@@ -451,7 +452,7 @@ console.log('%c> icards:', "color:pink",  icards);
                     let containerElement = document.getElementById("show-icards-container");
                     if (containerElement.style.display === "none") {
 
-                        handleShowDrugIcardClick(drugObj, icards)
+                        drawDrugIcardClick(drugObj, icards)
                         containerElement.style.display = "block";
 
                     } else {
@@ -868,7 +869,7 @@ console.log('%c> toTestObj:', 'color:orange',  toTestObj);
 
 
 
-        function handleShowDrugIcardClick(drugObj, icardsObj)
+        function drawDrugIcardClick(drugObj, icardsObj)
         {
             console.log('%c> drugObj_:', "color:orange",  drugObj);
             console.log('%c> icardsObj_:', "color:orange",  icardsObj);
