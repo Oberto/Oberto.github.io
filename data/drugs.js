@@ -35,7 +35,7 @@ var drugData = {
         cc: [
           "Known bleeding disorder",
           "Clinically significant bleeding",
-          "known worsening of bronchospasm with NSAID's",
+          "Known worsening of bronchospasm with NSAID's",
         ],
         a: [
           "Inhibits the enzyme cyclooxygenase → reduced formation of prostaglandins and thromboxane",
