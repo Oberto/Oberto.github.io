@@ -206,7 +206,7 @@ var drugData = {
           "STEMI",
         ],
         c: [
-          "Known sever allergy",
+          "Known severe allergy",
           "BP < 110 mmHg",
           "HR < 40/min",
           "HR > 150/min",
