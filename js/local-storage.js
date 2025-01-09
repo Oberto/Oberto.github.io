@@ -36,9 +36,21 @@ deleteDrugById: function(key, drugId, icardId) {
     // Save the updated data back to local storage
     // localStorage.setItem('drugData', JSON.stringify(updatedData));
     this.save(key, this.encode(updatedData));
-
 },
 
+deleteSavedSetById: function(key, setId) {
+    // Retrieve the current data from local storage
+    let data = this.decode(this.load(key)) || [];
+
+
+    // Filter out the object that matches both drug.id and icard.id
+    // let updatedData = data.filter(item => !(item.drug.id === drugId && item.icard.id === icardId));
+    let updatedData = data.filter(item => item.name !== setId);;
+
+    // Save the updated data back to local storage
+    // localStorage.setItem('drugData', JSON.stringify(updatedData));
+    this.save(key, this.encode(updatedData));
+},
 
 
 /**

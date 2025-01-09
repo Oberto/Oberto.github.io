@@ -120,10 +120,17 @@
             .button.short {
                 padding: 0 15px !important; /* Use this if you're using only an icon in a button*/
             }
+
+            .button.slim {
+                height:28px;
+                line-height: 28px;
+            }
+
+
             /* End adding icons to buttons */
 
             /* Checkboxes */
-            #checkbox-container-icards, #checkbox-container-drugs {
+            #checkbox-container-icards, #checkbox-container-drugs, #checkbox-container-saved-sets  {
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
                 gap: 10px;
@@ -269,11 +276,41 @@
                 <ion-icon name="chevron-down-outline" aria-hidden="true" class="icon"></ion-icon>
             </button>
             <div class="content">
-                <div style="margin-top:20px"><input type="checkbox" id="selectAll" data-name="icards" onclick="toggleAllCheckboxes(this, '.item-icards input')"> <h6 style="display: inline-block">ICARDS</h6> </div>
+                <!-- iCards -->
+                <div style="margin-top:20px"><input type="checkbox" id="" data-name="icards" onclick="toggleAllCheckboxes(this, '.item-icards input')"> <h6 style="display: inline-block">ICARDS</h6> </div>
                 <div id="checkbox-container-icards"></div>
-                <div><input type="checkbox" id="selectAll" data-name="drugs" onclick="toggleAllCheckboxes(this, '.item-drugs input')"> <h6 style="display: inline-block">Drugs</h6> </div>
+
+                <!-- drugs -->
+                <div><input type="checkbox" id="" data-name="drugs" onclick="toggleAllCheckboxes(this, '.item-drugs input')"> <h6 style="display: inline-block">Drugs</h6> </div>
                 <div id="checkbox-container-drugs"></div>
-                <div><span class="u-pull-right" style="color: #ccc">v1.2</span></div>
+
+                <!-- Saved sets -->
+                <div> <h6 style="display: inline-block">Saved Sets</h6> </div>
+                <div id="checkbox-container-saved-sets"></div>
+                <div style="padding: 15px;">
+
+                    <!-- <a href="#" onclick="saveSet();return false;">Save</a> -->
+                    <!-- <a href="#" onclick="removeSet(this);return false;" class="u-pull-right" id="remove-current-set" data-current-set-name="">Delete current set (<span id="current-set-name"></span>)</a> -->
+
+                    <a class="button short slim"
+                        id="add-to-retest-btn"
+                        aria-hidden="true"
+                        title=""
+                        onclick="saveSet();return false;"><ion-icon name="bookmark"></ion-icon>Save set
+                    </a>
+
+                    <a class="button short slim u-pull-right"
+                        id="remove-current-set"
+                        data-current-set-name=""
+                        aria-hidden="true"
+                        title=""
+                        onclick="removeSet(this);return false;"><ion-icon name="trash"></ion-icon>Delete current set (<span id="current-set-name"></span>)
+                    </a>
+
+                </div>
+
+                <!-- Footer -->
+                <div><span class="u-pull-right" style="color: #ccc">v1.3</span></div>
             </div>
 
             <div class="row" style="margin-top: 20px">
@@ -370,6 +407,7 @@
 
             let drugs = Utils.sortByName(drugData.getAllDrugs());
             let icards = icardData.getAllIcards();
+
 console.log('%c> icards:', "color:pink",  icards);
             var _currentSelection = {
                 drug: {},
@@ -391,16 +429,20 @@ console.log('%c> icards:', "color:pink",  icards);
             CheckOffSelectedItems(icards, "icards");
             CheckOffSelectedItems(drugs, "drugs");
 
+            drawSavedSets(
+                document.getElementById("checkbox-container-saved-sets"),
+                "saved-sets"
+            );
 
             getNextQuestion();
 
-
+            document.getElementById('remove-current-set').style.display = 'none';
 
             function getNextQuestion()
             {
                 const checkbox = document.querySelector('#retestCheckbox');
 
-                // If "to learn" checkbox is selected
+                // If "to learn" (Re-test) checkbox is selected
                 if (checkbox.checked) {
                     console.log('%c> getToLearnQuestion()', "color:#f1107a");
                     var dataset = getToLearnQuestion();
@@ -664,6 +706,9 @@ console.log('%c> toTestObj:', 'color:orange',  toTestObj);
                 });
             }
 
+
+
+
             function formatAnswer(answerArr)
             {
                 let html = "";
@@ -780,6 +825,8 @@ console.log('%c> toTestObj:', 'color:orange',  toTestObj);
                 // alert("Checkboxes loaded from local storage.");
             }
 
+
+
             function addToRetest()
             {
                 console.log('%c> _currentSelection:', "color:orange",  _currentSelection);
@@ -840,74 +887,235 @@ console.log('%c> toTestObj:', 'color:orange',  toTestObj);
                 });
             });
 
-        // Toggle all checkboxes based on the "Select All" checkbox state
-        function toggleAllCheckboxes(selectAllCheckbox, ele) {
-            console.log('%c> aaaa)', "color:#f1107a");
-            // const checkboxes = document.querySelectorAll('.item-icards input');
-            const checkboxes = document.querySelectorAll(ele);
+            // Toggle all checkboxes based on the "Select All" checkbox state
+            function toggleAllCheckboxes(selectAllCheckbox, ele) {
+                console.log('%c> aaaa)', "color:#f1107a");
+                // const checkboxes = document.querySelectorAll('.item-icards input');
+                const checkboxes = document.querySelectorAll(ele);
+
+                checkboxes.forEach(checkbox => {
+                    console.log('%c> ^', "color:#f1107a");
+                    checkbox.checked = selectAllCheckbox.checked;
+                });
+
+                let name = selectAllCheckbox.getAttribute("data-name");
+                _saveSelectedItems(name);
+            }
 
 
-            checkboxes.forEach(checkbox => {
-                console.log('%c> ^', "color:#f1107a");
-                checkbox.checked = selectAllCheckbox.checked;
-
-                // checkbox.click();
-            });
-
-            let name = selectAllCheckbox.getAttribute("data-name");
-            _saveSelectedItems(name);
-
-        }
+            function drawDrugIcardClick(drugObj, icardsObj)
+            {
+                console.log('%c> drugObj_:', "color:orange",  drugObj);
+                console.log('%c> icardsObj_:', "color:orange",  icardsObj);
 
 
-/*
-                const answerArr = drugObj[icardObj.id];
-
-                // Format the answer
-                formattedAnswer = formatAnswer(answerArr);
-*/
+                // Add the header
+                let headerElement = document.getElementById("show-icards-drug-name");
+                headerElement.innerHTML = drugObj.name;
 
 
+                var icardsDetails = ''
+                icardsObj.forEach((item) => {
 
-        function drawDrugIcardClick(drugObj, icardsObj)
-        {
-            console.log('%c> drugObj_:', "color:orange",  drugObj);
-            console.log('%c> icardsObj_:', "color:orange",  icardsObj);
+                    icardsDetails += '<h6>' + item.name + '</h6>';
 
+                    const answerArr = drugObj[item.id];
+                    console.log('%c> answerArr:', "color:orange",  answerArr);
+                    icardsDetails += formatAnswer(answerArr);
 
-            // Add the header
-            let headerElement = document.getElementById("show-icards-drug-name");
-            headerElement.innerHTML = drugObj.name;
-
-
-            var icardsDetails = ''
-            icardsObj.forEach((item) => {
-
-
-                icardsDetails += '<h6>' + item.name + '</h6>';
-
-
-                const answerArr = drugObj[item.id];
-                console.log('%c> answerArr:', "color:orange",  answerArr);
-                icardsDetails += formatAnswer(answerArr);
-
-            });
+                });
 
 
 
-            // Add the icards contents
-            let detailsElement = document.getElementById("show-icards-details");
-            detailsElement.innerHTML = icardsDetails;
+                // Add the icards contents
+                let detailsElement = document.getElementById("show-icards-details");
+                detailsElement.innerHTML = icardsDetails;
 
-            // // Show the row
-            // let containerElement = document.getElementById("show-icards-container");
-            // containerElement.style.display = "block";
+                // // Show the row
+                // let containerElement = document.getElementById("show-icards-container");
+                // containerElement.style.display = "block";
+            }
+
+            function removeSet(ele) {
+                let name = ele.getAttribute("data-current-set-name");
+
+                console.log('%c> name to remove:', 'color:orange',  name);
+
+                _storeObj.deleteSavedSetById('savedSets', name);
+
+                // Refresh the displayed list
+                drawSavedSets(
+                    document.getElementById("checkbox-container-saved-sets"),
+                    "saved-sets"
+                );
+
+                // Hide remove button
+                ele.style.display = 'none';
+            }
+
+            function saveSet() {
+
+                // Get saved sets
+                const savedSetsArr = _storeObj.decode(_storeObj.load('savedSets'), '[]') || [];
+
+
+                // Validate at least has been found
+                if (savedSetsArr.length == 0) {
+                    console.log("No saved sets");
+                }
+
+                // Get the icards that are selected
+                const selectedIcardItems = [];
+
+                icards.forEach((item) => {
+                    let checkbox = document.getElementById(item.id);
+                    if (checkbox.checked) {
+                        selectedIcardItems.push({
+                            id: item.id,
+                            name: item.name,
+                        });
+                    }
+                });
+
+                // Get the drugs that are selected
+                const selectedDrugItems = [];
+
+                drugs.forEach((item) => {
+                    let checkbox = document.getElementById(item.id);
+                    if (checkbox.checked) {
+                        selectedDrugItems.push({
+                            id: item.id,
+                            name: item.name,
+                        });
+                    }
+                });
+
+                // Ask the user for a name
+                let name = prompt("Name", "");
+                if (name == null || name == "") {
+                    console.log('%c> User cancelled the prompt', 'color:#f1107a');
+                    return;
+                }
+
+                // Save the set
+                savedSetsArr.push(
+                    {
+                        name: name,
+                        icards: selectedIcardItems,
+                        drugs: selectedDrugItems
+                    }
+                )
+
+                localStorage.setItem('savedSets', JSON.stringify(savedSetsArr));
+
+                // Refresh the displayed list
+                drawSavedSets(
+                    document.getElementById("checkbox-container-saved-sets"),
+                    "saved-sets"
+                );
+
+            }
+
+
+            function drawSavedSets(container, classname) {
+
+                container.innerHTML = '';
+
+                const savedSetsArr = _storeObj.decode(_storeObj.load('savedSets'), '[]') || [];
+
+                // Validate at least has been found
+                if (savedSetsArr.length == 0) {
+                    console.log("No saved sets");
+                    // return;
+                }
+                console.log('%c> savedSetsArr:', 'color:orange',  savedSetsArr);
 
 
 
-        }
+                savedSetsArr.forEach((item) => {
+
+                    let div = document.createElement("div");
+                    div.classList.add("item");
+                    div.classList.add("item-" + classname);
+
+                    let a = document.createElement("a");
+                    a.addEventListener("click", loadSavedSet);
+                    a.setAttribute("data-name", item.name);
+                    var linkText = document.createTextNode(item.name);
+                    a.appendChild(linkText);
+                    a.title = item.name;
+                    a.href = '#';
+
+                    div.appendChild(a);
+                    container.appendChild(div);
+                });
+
+            }
+
+            function loadSavedSet(e) {
+                e.preventDefault();
+
+                let name = this.getAttribute("data-name");
+                console.log('%c> name:', 'color:orange',  name);
+
+                // current-set-name
+                document.getElementById('current-set-name').innerHTML = name;
+                document.getElementById('remove-current-set').setAttribute('data-current-set-name', name);
 
 
+
+                const savedSetsArr = _storeObj.decode(_storeObj.load('savedSets'), '[]') || [];
+
+
+                savedSetsArr.forEach((item) => {
+
+                    if (item.name === name) {
+                        console.log('%c> item-icards:', 'color:orange',  item.icards);
+                        console.log('%c> item-drugs:', 'color:orange',  item.drugs);
+
+
+
+                        // Clear previous selections
+                        icards.forEach((item) => {
+                            let checkbox = document.getElementById(item.id);
+                            checkbox.checked = false; // Uncheck all checkboxes
+                        });
+                        // Repopulate checkboxes based on saved items
+                        item.icards.forEach((savedItem) => {
+                            console.log('%c> savedItem:',   'color:orange',  savedItem);
+                            let checkbox = document.getElementById(savedItem.id);
+                            if (checkbox) {
+                                checkbox.checked = true; // Check the saved checkboxes
+                            }
+                        });
+
+
+
+                        // Clear previous selections
+                        drugs.forEach((item) => {
+                            let checkbox = document.getElementById(item.id);
+                            checkbox.checked = false; // Uncheck all checkboxes
+                        });
+                        // Repopulate checkboxes based on saved items
+                        item.drugs.forEach((savedItem) => {
+                            let checkbox = document.getElementById(savedItem.id);
+                            if (checkbox) {
+                                checkbox.checked = true; // Check the saved checkboxes
+                            }
+                        });
+
+
+
+                        // CheckOffSelectedItems(item.icards, "icards");
+                        // CheckOffSelectedItems(item.drugs, "drugs");
+                    }
+                });
+
+                document.getElementById('remove-current-set').style.display = 'block';
+
+
+
+            }
 
             // });
         </script>
