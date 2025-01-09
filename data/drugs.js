@@ -360,7 +360,6 @@ var drugData = {
         i: [
           "Bronchospasm associated with asthma or COPD",
           "Croup",
-          "Prominent rash associated with anaphylaxis (provided all systemic signs have resolved)",
           "Minor allergy associated with rash",
         ],
         c: ["Known severe allergy"], //contraindications
@@ -445,7 +444,6 @@ var drugData = {
         i: [
           "Bronchospasm associated with asthma or COPD",
           "Croup",
-          "Prominent rash associated with anaphylaxis (provided all systemic signs have resolved)",
           "Minor allergy associated with rash",
         ],
         c: ["Known severe allergy"], //contraindications
