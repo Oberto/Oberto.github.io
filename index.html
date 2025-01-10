@@ -1086,8 +1086,6 @@ console.log('%c> toTestObj:', 'color:orange',  toTestObj);
                         console.log('%c> item-icards:', 'color:orange',  item.icards);
                         console.log('%c> item-drugs:', 'color:orange',  item.drugs);
 
-
-
                         // Clear previous selections
                         icards.forEach((item) => {
                             let checkbox = document.getElementById(item.id);
@@ -1101,8 +1099,6 @@ console.log('%c> toTestObj:', 'color:orange',  toTestObj);
                                 checkbox.checked = true; // Check the saved checkboxes
                             }
                         });
-
-
 
                         // Clear previous selections
                         drugs.forEach((item) => {
@@ -1126,7 +1122,7 @@ console.log('%c> toTestObj:', 'color:orange',  toTestObj);
 
                 document.getElementById('remove-current-set').style.display = 'block';
 
-
+                getNextQuestion();
 
             }
 
