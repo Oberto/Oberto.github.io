@@ -122,10 +122,13 @@
             }
 
             .button.slim {
-                height:28px;
-                line-height: 28px;
+                height:25px;
+                line-height: 25px;
             }
 
+            .button.slim ion-icon {
+                font-size: 15px;
+            }
 
             /* End adding icons to buttons */
 
@@ -249,6 +252,16 @@
 
                 /* End Additional button styles */
 
+            /* red (alt: #ff6f61) */
+            .red {
+                color: #e74c3c;
+            }
+
+            /* blue */
+            .blue {
+                color: #3498db;
+            }
+
         </style>
 
         <script
@@ -292,14 +305,14 @@
                     <!-- <a href="#" onclick="saveSet();return false;">Save</a> -->
                     <!-- <a href="#" onclick="removeSet(this);return false;" class="u-pull-right" id="remove-current-set" data-current-set-name="">Delete current set (<span id="current-set-name"></span>)</a> -->
 
-                    <a class="button short slim"
+                    <a class="button short slim blue"
                         id="add-to-retest-btn"
                         aria-hidden="true"
                         title=""
                         onclick="saveSet();return false;"><ion-icon name="bookmark"></ion-icon>Save set
                     </a>
 
-                    <a class="button short slim u-pull-right"
+                    <a class="button short slim u-pull-right red"
                         id="remove-current-set"
                         data-current-set-name=""
                         aria-hidden="true"
@@ -310,7 +323,7 @@
                 </div>
 
                 <!-- Footer -->
-                <div><span class="u-pull-right" style="color: #ccc">v1.3</span></div>
+                <div><span class="u-pull-right" style="color: #ccc">v1.3.1</span></div>
             </div>
 
             <div class="row" style="margin-top: 20px">
