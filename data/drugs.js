@@ -232,7 +232,7 @@ var drugData = {
           "Myocardial ischaemia - 0.4mg every 5 minutes (every 10 minutes if cautioned)",
           "Cardiogenic pulmonary oedema - 0.8mg every 5 minutes (every 10 minutes if cautioned)",
           "Control of hypertension - 0.4mg every 5 minutes",
-          "STEMI - 0.4mg every 5 minutes (withhold if signs of poor perfusion are present)",
+          "STEMI - 0.4mg with caution (withhold if signs of poor perfusion are present)",
         ],
         s: [
           "Hypotension",
