@@ -42,7 +42,7 @@ var drugData = {
           "Anti-platelet, anti-pyretic, anti-inflammatory and analgesic effects",
           "Pre-hospital = anti-platelet effect",
         ],
-        r: ["Per oral (PO)", "Dispersible tablet (chewable)"],
+        r: ["Per oral (PO)", "Dispersible tablet (chewable), or dissolved in water"],
         d: [
     			"300 mg",
     			"No repeats",
