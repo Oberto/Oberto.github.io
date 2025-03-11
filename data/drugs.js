@@ -30,7 +30,7 @@ var drugData = {
       {
         name: "Aspirin",
         id: "aspirin",
-        i: ["Myocardial ischaemia"],
+        i: ["Myocardial ischaemia", "STEMI"],
         c: ["Known severe allergy", "Third trimester of pregnancy"],
         cc: [
           "Known bleeding disorder",
