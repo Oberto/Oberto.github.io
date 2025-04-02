@@ -185,7 +185,7 @@ var drugData = {
         r: ["Nebulised (Neb)"],
         d: [
           "5mg for adults and children",
-          "Repeat as neccessary",
+          "Repeat as necessary",
           "First dose with 0.5mg ipratropium",
         ],
         s: ["Tachycardia", "Tremor"],
