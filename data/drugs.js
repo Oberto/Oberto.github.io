@@ -151,7 +151,7 @@ var drugData = {
         id: "ipratropium",
         i: [
           "Bronchospasm secondary to asthma or COPD",
-          "Prominante bronchospasm secondary to airway burns, smoke inhalation or chest infection",
+          "Prominent bronchospasm secondary to airway burns, smoke inhalation or chest infection",
         ],
         c: ["Known severe allergy"],
         cc: ["None"],
