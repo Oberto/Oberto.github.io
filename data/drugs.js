@@ -217,7 +217,7 @@ var drugData = {
           "The patient is frail",
           "Signs of shock",
           "Dysrhythmia",
-          "Has taken phosphodiesterase inhibitor in the lasy 24 hours",
+          "Has taken phosphodiesterase inhibitor in the last 24 hours",
           "Known aortic and mitral stenosis",
         ],
         a: [
