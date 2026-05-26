@@ -68,7 +68,7 @@ var drugData = {
         i: [
           "Hypoglycaemia when the patient cannot safely swallow glucose/food and IV access cannot be obtained",
         ],
-        c: ["Known Severe Allergy"],
+        c: ["Known severe allergy"],
         cc: ["None"],
         a: [
           "Stimulates glycogenolysis → increases blood glucose level",
