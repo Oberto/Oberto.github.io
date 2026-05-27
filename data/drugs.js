@@ -342,7 +342,7 @@ var drugData = {
         a: [
           "Inhibits the production of prostaglandins → reduction in pain and fever",
         ],
-        r: ["Per Oral (PO)"], //route
+        r: ["Per oral (PO)"], //route
         d: [
           "1g (1000mg) for an adult weighing 80kg or less",
           "1.5g (1500mg) for an adult weighing more than 80kg",
