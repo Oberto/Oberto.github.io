@@ -30,6 +30,7 @@ var drugData = {
       {
         name: "Aspirin",
         id: "aspirin",
+        color: "#e74c3c",
         i: ["Myocardial ischaemia", "STEMI"],
         c: ["Known severe allergy", "Third trimester of pregnancy"],
         cc: [
@@ -65,6 +66,7 @@ var drugData = {
       {
         name: "Glucagon",
         id: "glucagon",
+        color: "#b8860b",
         i: [
           "Hypoglycaemia when the patient cannot safely swallow glucose/food and IV access cannot be obtained",
         ],
@@ -88,6 +90,7 @@ var drugData = {
       {
         name: "Glucose gel",
         id: "glucosegel",
+        color: "#f5b041",
         i: [
           "Hypoglycaemia and able to swallow safely",
           "Hypoglycaemia in neonates",
@@ -109,6 +112,7 @@ var drugData = {
       {
         name: "Ibuprofen",
         id: "ibuprofen",
+        color: "#d35400",
         i: [
           "Mild pain (usually in combination with paracetamol)",
           "May be used in moderate to severe pain in combination with other medicine, particularly when the transport time is long",
@@ -149,6 +153,7 @@ var drugData = {
       {
         name: "Ipratropium",
         id: "ipratropium",
+        color: "#16a085",
         i: [
           "Bronchospasm secondary to asthma or COPD",
           "Prominent bronchospasm secondary to airway burns, smoke inhalation or chest infection",
@@ -170,6 +175,7 @@ var drugData = {
       {
         name: "Salbutamol",
         id: "salbutamol",
+        color: "#2980b9",
         i: [
           "Bronchospasm secondary to asthma or COPD",
           "Prominent bronchospasm secondary to airway burns, smoke inhalation or chest infection",
@@ -197,6 +203,7 @@ var drugData = {
       {
         name: "GTN",
         id: "gtn",
+        color: "#e84393",
         i: [
           "Myocardial ischaemia",
           "Cardiogenic pulmonary oedema",
@@ -252,6 +259,7 @@ var drugData = {
       {
         name: "Loratadine",
         id: "loratadine",
+        color: "#6c5ce7",
         i: [
           "Minor allergic reactions confined to skin involvement",
           "Prominent itch associated with anaphylaxis (provided all systemic signs have resolved)",
@@ -277,6 +285,7 @@ var drugData = {
       {
         name: "Methoxyflurane",
         id: "methoxyflurane",
+        color: "#27ae60",
         i: [
           "Moderate to severe pain, when there will be a significant delay in an opiate being administered.",
         ],
@@ -309,6 +318,7 @@ var drugData = {
       {
         name: "Ondansetron",
         id: "ondansetron",
+        color: "#795548",
         i: ["Clinically significant nausea and/or vomiting"],
         c: ["Known severe allergy", "Age less than 1 year old"], //contraindications
         cc: ["None"], // cautions
@@ -329,6 +339,7 @@ var drugData = {
       {
         name: "Paracetamol",
         id: "aracetamol",
+        color: "#e67e22",
         i: [
           "Mild or moderate pain (usually in combination with other medicines)",
           "Severe pain in addition to other medicines, particularly if the transport time is long",
@@ -357,6 +368,7 @@ var drugData = {
       {
         name: "Prednisone",
         id: "prednisone",
+        color: "#8e44ad",
         i: [
           "Bronchospasm associated with asthma or COPD",
           "Croup",
@@ -379,6 +391,7 @@ var drugData = {
       {
         name: "Adrenaline",
         id: "adrenaline",
+        color: "#2c3e50",
         i: [
           "Anaphylaxis",
           "Severe asthma",
@@ -441,6 +454,7 @@ var drugData = {
       {
         name: "Prednisolone",
         id: "prednisolone",
+        color: "#9b59b6",
         i: [
           "Bronchospasm associated with asthma or COPD",
           "Croup",

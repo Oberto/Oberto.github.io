@@ -262,6 +262,106 @@
                 color: #3498db;
             }
 
+            /* ===== Drug colour coding ===== */
+
+            /*
+             * The whole "current card" reads from these variables, which are set
+             * per-question in populateQuestion():
+             *   --drug-color      the drug's full colour
+             *   --drug-tint       a light (washed-out) version for backgrounds
+             *   --drug-pill-text  black/white text that reads on the full colour
+             */
+            :root {
+                --drug-color: #7f8c8d;
+                --drug-tint: transparent;
+                --drug-pill-text: #fff;
+            }
+
+            /* Smaller dot for the drug selection list */
+            .checkbox-swatch {
+                display: inline-block;
+                width: 11px;
+                height: 11px;
+                border-radius: 50%;
+                margin-right: 6px;
+                vertical-align: middle;
+                border: 1px solid rgba(0, 0, 0, 0.15);
+                flex: 0 0 auto;
+            }
+
+            /* Drug name shown as a filled colour pill in the question */
+            .drug-pill {
+                display: inline-block;
+                padding: 2px 14px;
+                border-radius: 14px;
+                font-weight: 600;
+                text-decoration: none;
+                background-color: var(--drug-color);
+                color: var(--drug-pill-text);
+            }
+            .drug-pill:hover {
+                opacity: 0.9;
+                color: var(--drug-pill-text);
+            }
+
+            /* Tinted box holding the Drug / ICARD prompt */
+            #question-info {
+                background: var(--drug-tint);
+                border-left: 5px solid var(--drug-color);
+                padding: 10px 14px;
+                border-radius: 4px;
+                transition: background 0.2s ease, border-color 0.2s ease;
+            }
+
+            /* The answer block: light tinted background + colour edge */
+            #answer-container {
+                border-left: 6px solid var(--drug-color);
+                background: var(--drug-tint);
+                padding: 12px 14px;
+                border-radius: 4px;
+                transition: background 0.2s ease, border-color 0.2s ease;
+            }
+
+            /* Your-answer textarea picks up the colour on focus */
+            #your-answer-tarea:focus {
+                border-color: var(--drug-color);
+            }
+
+            /* Show-answer button themed to the current drug */
+            #show-answer-btn {
+                background-color: var(--drug-color);
+                border-color: var(--drug-color);
+                color: var(--drug-pill-text);
+            }
+            #show-answer-btn:hover,
+            #show-answer-btn:focus {
+                background-color: var(--drug-color);
+                border-color: var(--drug-color);
+                color: var(--drug-pill-text);
+                opacity: 0.9;
+            }
+
+            /* Coloured header band on the expanded full-card */
+            #show-icards-drug-name {
+                display: inline-block;
+                padding: 4px 16px;
+                border-radius: 6px;
+                text-decoration: none;
+                background-color: #7f8c8d;
+                color: #fff;
+            }
+
+            /* Each ICARDS field in the expanded card: colour edge + light tint */
+            .icard-block {
+                border-left: 4px solid var(--drug-color);
+                background: var(--drug-tint);
+                padding: 8px 12px;
+                border-radius: 0 4px 4px 0;
+                margin-bottom: 10px;
+            }
+
+            /* ===== End drug colour coding ===== */
+
         </style>
 
         <script
@@ -328,8 +428,10 @@
 
             <div class="row" style="margin-top: 20px">
                 <div class="one-half column">
-                    <div><strong>Drug:</strong> <span id="drug"></span></div>
-                    <div><strong>ICARD:</strong> <span id="icard"></span></div>
+                    <div id="question-info">
+                        <div><strong>Drug:</strong> <span id="drug"></span></div>
+                        <div><strong>ICARD:</strong> <span id="icard"></span></div>
+                    </div>
                 </div>
                 <div class="one-half column">
 
@@ -421,6 +523,56 @@
             let drugs = Utils.sortByName(drugData.getAllDrugs());
             let icards = icardData.getAllIcards();
 
+            /* =============================================================================
+             * Drug colour helpers
+             * ===========================================================================*/
+
+            // Fallback colour for any drug that has no `color` set in drugs.js
+            var DEFAULT_DRUG_COLOR = "#7f8c8d";
+
+            function drugColor(obj) {
+                return obj && obj.color ? obj.color : DEFAULT_DRUG_COLOR;
+            }
+
+            // Choose black or white text for legibility on a coloured background
+            function textColorFor(hex) {
+                var c = hex.replace("#", "");
+                var r = parseInt(c.substr(0, 2), 16);
+                var g = parseInt(c.substr(2, 2), 16);
+                var b = parseInt(c.substr(4, 2), 16);
+                var lum = 0.299 * r + 0.587 * g + 0.114 * b;
+                return lum > 150 ? "#222" : "#fff";
+            }
+
+            // Darken a colour just enough to stay readable as text on a white page
+            function onWhite(hex) {
+                var c = hex.replace("#", "");
+                var r = parseInt(c.substr(0, 2), 16);
+                var g = parseInt(c.substr(2, 2), 16);
+                var b = parseInt(c.substr(4, 2), 16);
+                var lum = 0.299 * r + 0.587 * g + 0.114 * b;
+                while (lum > 140) {
+                    r = Math.round(r * 0.85);
+                    g = Math.round(g * 0.85);
+                    b = Math.round(b * 0.85);
+                    lum = 0.299 * r + 0.587 * g + 0.114 * b;
+                }
+                return "rgb(" + r + "," + g + "," + b + ")";
+            }
+
+            // Mix a colour toward white to make a light background tint.
+            // amount 0 = white, 1 = full colour. ~0.12 gives a soft wash.
+            function lighten(hex, amount) {
+                var c = hex.replace("#", "");
+                var r = parseInt(c.substr(0, 2), 16);
+                var g = parseInt(c.substr(2, 2), 16);
+                var b = parseInt(c.substr(4, 2), 16);
+                r = Math.round(255 + (r - 255) * amount);
+                g = Math.round(255 + (g - 255) * amount);
+                b = Math.round(255 + (b - 255) * amount);
+                return "rgb(" + r + "," + g + "," + b + ")";
+            }
+
 console.log('%c> icards:', "color:pink",  icards);
             var _currentSelection = {
                 drug: {},
@@ -497,7 +649,17 @@ console.log('%c> icards:', "color:pink",  icards);
 
 
                 // Update the HTML with selected drug + icard
-                document.getElementById("drug").innerHTML = '<a id="showDrugIcard" href="#" >' + drugObj.name + '</a>';
+                var col = drugColor(drugObj);
+
+                // Theme the whole "current card" from these variables
+                var root = document.documentElement;
+                root.style.setProperty("--drug-color", col);
+                root.style.setProperty("--drug-tint", lighten(col, 0.12));
+                root.style.setProperty("--drug-pill-text", textColorFor(col));
+
+                document.getElementById("drug").innerHTML =
+                    '<a id="showDrugIcard" href="#" class="drug-pill">' +
+                    drugObj.name + '</a>';
 
                 // Add an event listener to the dynamically created link - this will show the whole icard for the drug
                 document.getElementById("showDrugIcard").addEventListener("click", function(event) {
@@ -711,7 +873,15 @@ console.log('%c> toTestObj:', 'color:orange',  toTestObj);
 
                     let label = document.createElement("label");
                     label.htmlFor = item.id;
-                    label.textContent = item.name;
+
+                    // Drugs get a coloured dot so this list doubles as a colour legend
+                    if (classname === "drugs" && item.color) {
+                        let sw = document.createElement("span");
+                        sw.className = "checkbox-swatch";
+                        sw.style.backgroundColor = item.color;
+                        label.appendChild(sw);
+                    }
+                    label.appendChild(document.createTextNode(item.name));
 
                     div.appendChild(checkbox);
                     div.appendChild(label);
@@ -921,20 +1091,26 @@ console.log('%c> toTestObj:', 'color:orange',  toTestObj);
                 console.log('%c> drugObj_:', "color:orange",  drugObj);
                 console.log('%c> icardsObj_:', "color:orange",  icardsObj);
 
+                var col = drugColor(drugObj);
 
-                // Add the header
+                // Add the header with the drug's colour band
                 let headerElement = document.getElementById("show-icards-drug-name");
                 headerElement.innerHTML = drugObj.name;
+                headerElement.style.backgroundColor = col;
+                headerElement.style.color = textColorFor(col);
 
 
                 var icardsDetails = ''
                 icardsObj.forEach((item) => {
 
+                    icardsDetails += '<div class="icard-block" style="border-left-color:' + col + '">';
                     icardsDetails += '<h6>' + item.name + '</h6>';
 
                     const answerArr = drugObj[item.id];
                     console.log('%c> answerArr:', "color:orange",  answerArr);
                     icardsDetails += formatAnswer(answerArr);
+
+                    icardsDetails += '</div>';
 
                 });
 

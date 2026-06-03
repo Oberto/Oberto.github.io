@@ -157,6 +157,19 @@
             let drugs = Utils.sortByName(drugData.getAllDrugs());
             let icards = icardData.getAllIcards();
 
+            var DEFAULT_DRUG_COLOR = "#7f8c8d";
+            function drugColor(obj) {
+                return obj && obj.color ? obj.color : DEFAULT_DRUG_COLOR;
+            }
+            function textColorFor(hex) {
+                var c = hex.replace("#", "");
+                var r = parseInt(c.substr(0, 2), 16);
+                var g = parseInt(c.substr(2, 2), 16);
+                var b = parseInt(c.substr(4, 2), 16);
+                var lum = 0.299 * r + 0.587 * g + 0.114 * b;
+                return lum > 150 ? "#222" : "#fff";
+            }
+
 
 
             console.log('%c> drugs:', 'color:orange',  drugs);
@@ -214,7 +227,10 @@
                 // Loop through each drug
                 drugsObj.forEach((drugObj) => {
 
-                    output += '<h4>~ ' + drugObj.name + ' ~</h4>';
+                    var col = drugColor(drugObj);
+                    output += '<h4 style="background-color:' + col + '; color:' + textColorFor(col) +
+                        '; text-decoration:none; display:inline-block; padding:4px 16px; border-radius:6px;">' +
+                        drugObj.name + '</h4>';
 
 
                     // loop through each icard
