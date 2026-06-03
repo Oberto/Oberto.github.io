@@ -121,6 +121,10 @@
                 padding: 0 15px !important; /* Use this if you're using only an icon in a button*/
             }
 
+            .button.short .margin-top {
+                margin-top: 15px;
+            }
+
             .button.slim {
                 height:25px;
                 line-height: 25px;
@@ -157,6 +161,7 @@
 
             ul {
                 list-style-position: outside;
+                margin-left: 15px;
             }
 
             .li-header {
@@ -435,7 +440,7 @@
                 </div>
                 <div class="one-half column">
 
-                    <a class="button button-secondary u-pull-right"
+                    <a class="button button-secondary u-pull-right margin-top"
                         id="next-question-btn"
                         onclick="getNextQuestion()">Next question</a>
 
@@ -470,14 +475,15 @@
                 <div class="one-half column">
                     <div id="answer-container" style="display: none">
                         <div id="answer"></div>
+                        <br />
 
-                    <a class="button short u-pull-right tooltip"
-                        id="add-to-retest-btn"
-                        aria-hidden="true"
-                        title=""
-                        onclick="addToRetest()"><ion-icon name="add-circle-outline" id="add-to-retest-icon"></ion-icon>
-                        <span class="tooltiptext">Retest later</span>
-                    </a>
+                        <a class="button short u-pull-right tooltip margin-top"
+                            id="add-to-retest-btn"
+                            aria-hidden="true"
+                            title=""
+                            onclick="addToRetest()"><ion-icon name="add-circle-outline" id="add-to-retest-icon"></ion-icon>
+                            <span class="tooltiptext">Retest later</span>
+                        </a>
 
                     </div>
                 </div>
