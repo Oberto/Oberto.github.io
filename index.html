@@ -119,10 +119,7 @@
 
             .button.short {
                 padding: 0 15px !important; /* Use this if you're using only an icon in a button*/
-            }
-
-            .button .margin-top {
-                margin-top: 15px;
+                background-color: #fff;
             }
 
             .button.slim {
@@ -325,6 +322,10 @@
                 padding: 12px 14px;
                 border-radius: 4px;
                 transition: background 0.2s ease, border-color 0.2s ease;
+
+                /*display: flex;
+                flex-direction: column;
+                gap: 15px;*/
             }
 
             /* Your-answer textarea picks up the colour on focus */
@@ -440,7 +441,7 @@
                 </div>
                 <div class="one-half column">
 
-                    <a class="button button-secondary u-pull-right margin-top"
+                    <a class="button button-secondary u-pull-right"
                         id="next-question-btn"
                         onclick="getNextQuestion()">Next question</a>
 
@@ -475,9 +476,9 @@
                 <div class="one-half column">
                     <div id="answer-container" style="display: none">
                         <div id="answer"></div>
-                        <br />
 
-                        <a class="button short u-pull-right tooltip margin-top"
+
+                        <a class="button short u-pull-right tooltip"
                             id="add-to-retest-btn"
                             aria-hidden="true"
                             title=""
@@ -919,7 +920,9 @@ console.log('%c> toTestObj:', 'color:orange',  toTestObj);
 
             function showAnswer() {
                 let element = document.getElementById("answer-container");
-                element.style.display = "block";
+                // element.style.display = "block";
+                // element.style.display = "flex";
+                element.style.display = "flow-root";
             }
 
             function toggleAnswer() {
@@ -930,7 +933,9 @@ console.log('%c> toTestObj:', 'color:orange',  toTestObj);
                     element.style.display === "none" ||
                     element.style.display === ""
                 ) {
-                    element.style.display = "block";
+                    // element.style.display = "block";
+                    // element.style.display = "flex";
+                    element.style.display = "flow-root";
                     button.innerText = "Hide answer"; // Change button text
                 } else {
                     element.style.display = "none";
