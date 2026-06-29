@@ -320,7 +320,7 @@ var drugData = {
         id: "ondansetron",
         color: "#795548",
         i: ["Clinically significant nausea and/or vomiting"],
-        c: ["Known severe allergy", "Age less than 1 year old"], //contraindications
+        c: ["Known severe allergy", "Age less than 1 year old", "Suspected serotonin syndrome"], //contraindications
         cc: ["None"], // cautions
         a: [
           "Blocks serotonin receptors centrally in the brain and peripherally in the gastrointestinal tract → reduction in nausea and vomiting",
