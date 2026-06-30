@@ -126,7 +126,7 @@ var drugData = {
         cc: [
           "The patient has taken ibuprofen within the last four hours",
           "Abdominal pain, particularly if the patient is very unwell or vomiting",
-          "Age greater than or equal to 75. Particularly if frail.",
+          "Age greater than or equal to 75. Particularly if frail",
         ], // cautions
         a: [
           "Inhibits the activity of prostaglandin synthesase, which reduces prostaglandin production causing a reduction in inflammation, pain and fever",
@@ -237,7 +237,7 @@ var drugData = {
         r: ["Sublingual (SL)"],
         d: [
           "Myocardial ischaemia - 0.4mg every 5 minutes (every 10 minutes if cautioned)",
-          "Cardiogenic pulmonary oedema - 0.8mg every 5 minutes (every 10 minutes if cautioned). Increase the dose and frequency if the patient is not improving.",
+          "Cardiogenic pulmonary oedema - 0.8mg every 5 minutes (every 10 minutes if cautioned). Increase the dose and frequency if the patient is not improving",
           "Control of hypertension - 0.4mg every 5 minutes",
           "STEMI - 0.4mg with caution (withhold if signs of poor perfusion are present)",
         ],
@@ -287,7 +287,7 @@ var drugData = {
         id: "methoxyflurane",
         color: "#27ae60",
         i: [
-          "Moderate to severe pain, when there will be a significant delay in an opiate being administered.",
+          "Moderate to severe pain, when there will be a significant delay in an opiate being administered",
         ],
         c: [
           "Known severe allergy",
@@ -306,8 +306,8 @@ var drugData = {
         ],
         r: ["Inhaled (INH)"], //route
         d: [
-          "Maximum of 6 ml (two doses) for a patient aged greater than or equal to 12 years.",
-          "Maximum of 3 ml (one dose) for a child aged less than 12 years.",
+          "Maximum of 6 ml (two doses) for a patient aged greater than or equal to 12 years",
+          "Maximum of 3 ml (one dose) for a child aged less than 12 years",
         ], //dose
         s: ["Sedation", "Light-headedness"], //side effects
         o: ["1-2 minutes"], //onset
